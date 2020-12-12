@@ -1,6 +1,7 @@
-
-# <center>Advanced Lane Finding </center>
-### <center>Philip Necsulescu, 05.12.2020</center>
+<div align='center'>
+    <h1>Advanced Lane Finding</h1>
+    <h3>Philip Necsulescu, 05.12.2020</h3>
+</div>
 
 ## Writeup / README
 
@@ -17,6 +18,9 @@
 ### Provide an example of a distortion-corrected image.
 
 ### Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image. Provide an example of a binary image result.
+
+I lowered the s_binary_min threshold from 170 used in the course to 150 to be able to get the lane covered by the tree's shadow
+narrowed the gradiant thresholds to [40 80] to get avoid noise/dirt from the middle of the road
 
 ### Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
@@ -36,7 +40,11 @@
 
 ### Briefly discuss any problems / issues you faced in your implementation of this project. Where will your pipeline likely fail? What could you do to make it more robust?
 
+    A white car or large objects might end up in front of the car and be idenfied as part of the lane. Using a maximum width might help as lane markings are relatively narrow.
+
+    Choosing source points has to be relatively close to car and not far down the horizon so that curves don't have as large of an impact.
 ### Issues encountered and solutions
 
  - cv2.imread imports in BGR, plt (plt.imshow and plt.write) use RGB.
      - Solution: use cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+ - Dark/dirty lanes
